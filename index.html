@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>🔔 الإشعارات • منصتي</title>
+  <!-- Font Awesome & Google Fonts -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+  /* ========== هيدر التصفية الأفقي الجديد (يُغني عن الهيدر القديم) ========== */
+  .notification-card{background:linear-gradient(145deg,#f8fafc,#e2e8f0)!important;border:none!important;box-shadow:inset 2px 2px 5px #ffffff,inset -2px -2px 5px #94a3b8,3px 3px 8px rgba(0,0,0,0.1),-1px -1px 4px rgba(255,255,255,0.6)!important;border-radius:20px!important;padding:16px 14px!important;margin-bottom:16px!important;color:#1e293b!important;text-shadow:1px 1px 2px rgba(255,255,255,0.8),-1px -1px 2px rgba(0,0,0,0.1)!important;transform:none!important;transition:none!important}
+  
+  .filter-section{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;border-bottom:none!important;padding:5px 10px!important}.filter-btn{flex-shrink:0!important;background:linear-gradient(145deg,#f8fafc,#e2e8f0)!important;border:none!important;box-shadow:inset 2px 2px 5px #ffffff,inset -2px -2px 5px #94a3b8,3px 3px 8px rgba(0,0,0,0.1),-1px -1px 4px rgba(255,255,255,0.6)!important;border-radius:30px!important;padding:6px 14px!important;font-size:12px!important;font-weight:700!important;color:#1e293b!important;text-shadow:1px 1px 2px rgba(255,255,255,0.8),-1px -1px 2px rgba(0,0,0,0.1)!important;transform:none!important;transition:none!important}.filter-btn i{font-size:12px!important;color:#64748b!important;text-shadow:1px 1px 2px rgba(255,255,255,0.8)!important}.filter-btn.active,.filter-btn.all-active{background:linear-gradient(145deg,#fbbf24,#d97706)!important;color:#0f172a!important;box-shadow:inset 2px 2px 5px #fef3c7,inset -2px -2px 5px #b45309,3px 3px 8px rgba(0,0,0,0.15),-1px -1px 4px rgba(255,255,255,0.8)!important}.filter-btn.active i,.filter-btn.all-active i{color:#0f172a!important}
+.filter-section {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  gap: 8px;
+  margin: 0 -12px 20px -12px; /* تمدد لكامل عرض الشاشة */
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+  scrollbar-width: thin;
+  scrollbar-color: #fbbf24 #e2e8f0;
+  white-space: nowrap;
+}
+
+/* إخفاء شريط التمرير في المتصفحات التي تدعمه (يظهر عند التمرير فقط) */
+.filter-section::-webkit-scrollbar {
+  height: 4px;
+  background: transparent;
+}
+.filter-section::-webkit-scrollbar-thumb {
+  background: #fbbf24;
+  border-radius: 20px;
+}
+.filter-section::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 20px;
+}
+
+/* أزرار التصفية داخل المستطيل */
+.filter-btn {
+  flex-shrink: 0; /* يمنع انكماش الأزرار */
+  background: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 40px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid #eef2f6;
+  white-space: nowrap;
+}
+
+/* تنسيق الزر النشط */
+.filter-btn.active,
+.filter-btn.all-active {
+  background: #1e293b;
+  color: white;
+  border-color: #fbbf24;
+  box-shadow: 0 6px 14px rgba(251, 191, 36, 0.2);
+}
+
+/* إخفاء الهيدر القديم (الـ notify-header) */
+.notify-header {
+  display: none !important;
+}
+
+/* تعديل بسيط ليكون زر الرجوع داخل شريط التصفية أو منفصلاً - اختياري */
+/* يمكنك إضافة زر الرجوع داخل نفس السطر إذا أردت */
+.filter-section::before {
+  content: "←";
+  display: inline-block;
+  background: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+  color: #fbbf24;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  cursor: pointer;
+  border: 1px solid rgba(251,191,36,0.2);
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.filter-section::before:hover {
+  background: #f8fafc;
+}
+/* اجعل العنصر الوهمي قابلاً للنقر */
+.filter-section {
+  cursor: default;
+}
+.filter-section::before {
+  cursor: pointer;
+}
+/* ربط العنصر الوهمي بوظيفة الرجوع */
+.filter-section[onclick]::before {
+  pointer-events: none;
+}
+    body {
+      background: linear-gradient(145deg, #f5f7fa 0%, #e8eef5 100%);
+      min-height: 100vh;
+      padding: 20px 12px 90px;
+      color: #01172a;
+    }
+
+    /* الهيدر */
+    .notify-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding: 8px 0;
+    }
+
+    .notify-header h2 {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .back-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      color: #fbbf24;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid rgba(251,191,36,0.2);
+    }
+
+    .filter-section {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+      background: rgba(255,255,255,0.6);
+      backdrop-filter: blur(10px);
+      padding: 12px;
+      border-radius: 30px;
+    }
+
+    .filter-btn {
+      background: white;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.03);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid #e2e8f0;
+    }
+
+    .filter-btn i { font-size: 14px; }
+    .filter-btn.active {
+      background: #1e293b;
+      color: white;
+      border-color: #fbbf24;
+    }
+
+    .filter-btn.all-active {
+      background: #fbbf24;
+      color: #0f172a;
+      font-weight: 800;
+    }
+
+    /* بطاقة الإشعار */
+    .notification-card {
+      background: white;
+      border-radius: 24px;
+      padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 8px 20px -6px rgba(0, 20, 40, 0.08);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      border: 1px solid rgba(255,255,255,0.8);
+      transition: 0.15s;
+      animation: fadeIn 0.3s ease;
+      position: relative;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .notif-avatar {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      border: 3px solid;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 6px 12px -4px rgba(0,0,0,0.1);
+    }
+
+    .notif-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .notif-content {
+      flex: 1;
+    }
+
+    .notif-header {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px 8px;
+      margin-bottom: 6px;
+    }
+
+    .actor-name {
+      font-weight: 800;
+      font-size: 16px;
+      color: #0f172a;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .verified-icon {
+      color: #3b82f6;
+      font-size: 14px;
+    }
+
+    .user-badge {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 30px;
+      font-weight: 700;
+      background: #fbbf24;
+      color: #0f172a;
+    }
+
+    .notif-action {
+      font-size: 13px;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      background: #f8fafc;
+      padding: 2px 10px;
+      border-radius: 20px;
+    }
+
+    .notif-time {
+      font-size: 11px;
+      color: #94a3b8;
+      margin-right: auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .notif-preview {
+      background: #f8fafc;
+      padding: 12px 14px;
+      border-radius: 18px;
+      margin: 10px 0 4px;
+      font-size: 13px;
+      color: #1e293b;
+      border: 1px solid #eef2f6;
+      cursor: pointer;
+      transition: 0.15s;
+    }
+
+    .notif-preview i {
+      margin-left: 6px;
+      color: #fbbf24;
+    }
+
+    .story-preview-badge {
+      background: linear-gradient(135deg, #fef3c7, #fde68a);
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #92400e;
+      cursor: pointer;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 50px 20px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 40px;
+      backdrop-filter: blur(5px);
+      color: #64748b;
+    }
+
+    .empty-state i {
+      font-size: 55px;
+      color: #cbd5e1;
+      margin-bottom: 15px;
+    }
+
+    #toastMsg {
+      position: fixed;
+      bottom: 30px;
+      left: 20px;
+      right: 20px;
+      background: #1e293b;
+      color: white;
+      padding: 14px 20px;
+      border-radius: 50px;
+      text-align: center;
+      z-index: 5000;
+      opacity: 0;
+      transition: 0.2s;
+      pointer-events: none;
+      max-width: 400px;
+      margin: 0 auto;
+      font-weight: 600;
+      font-size: 14px;
+    }
+    #toastMsg.show { opacity: 1; bottom: 40px; }
+  </style>
+</head>
+<body>
+
+<div id="toastMsg"></div>
+
+<div class="notify-header">
+  <h2><i class="fas fa-bell" style="color: #fbbf24;"></i> الإشعارات</h2>
+  <div class="back-btn" onclick="window.location.href='index.html'">
+    <i class="fas fa-arrow-right"></i>
+  </div>
+</div>
+
+<!-- أزرار التصفية -->
+  <div style="display:flex;flex-wrap:nowrap;overflow-x:auto;gap:8px;padding:12px 16px;white-space:nowrap;scrollbar-width:thin;background:rgba(255,255,255,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(251,191,36,0.25)"><button class="filter-btn all-active" data-filter="all" style="flex-shrink:0"><i class="fas fa-list"></i> الكل</button><button class="filter-btn" data-filter="like" style="flex-shrink:0"><i class="fas fa-heart"></i> إعجاب</button><button class="filter-btn" data-filter="comment" style="flex-shrink:0"><i class="fas fa-comment"></i> تعليق</button><button class="filter-btn" data-filter="follow" style="flex-shrink:0"><i class="fas fa-user-plus"></i> متابعة</button><button class="filter-btn" data-filter="unfollow" style="flex-shrink:0"><i class="fas fa-user-minus"></i> إلغاء</button><button class="filter-btn" data-filter="story" style="flex-shrink:0"><i class="fas fa-clock"></i> ستوري</button><button class="filter-btn" data-filter="share" style="flex-shrink:0"><i class="fas fa-share"></i> مشاركة</button><button class="filter-btn" data-filter="post" style="flex-shrink:0"><i class="fas fa-feather"></i> منشور</button></div>
+  
+
+<!-- حاوية الإشعارات -->
+<div id="notificationsContainer">
+  <div style="text-align:center; padding: 40px; color: #64748b;">
+    <i class="fas fa-spinner fa-pulse" style="font-size: 30px; margin-bottom: 15px;"></i>
+    <p>جاري تحميل الإشعارات...</p>
+  </div>
+</div>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
+  import { getFirestore, collection, query, where, orderBy, onSnapshot, doc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDYKCCTcurNcJslrNKqdiJCoIIK-YZArB4",
+    authDomain: "sbaq-fc46f.firebaseapp.com",
+    projectId: "sbaq-fc46f",
+    storageBucket: "sbaq-fc46f.firebasestorage.app",
+    appId: "1:1026865750415:web:0ee39a717bcafaa0d06bfa"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
+
+  let currentUser = null;
+  let currentUserData = null;
+  let followersMap = {};       // followers[uid] = [userId, ...]
+  let followingList = [];      // قائمة معرفات اللي انا متابعهم
+  let allNotifications = [];
+  let activeFilter = 'all';
+  
+  // مراجع الـ DOM
+  const container = document.getElementById('notificationsContainer');
+  const filterBtns = document.querySelectorAll('.filter-btn');
+
+  function showToast(msg, isGood = true) {
+    const t = document.getElementById('toastMsg');
+    t.textContent = msg;
+    t.style.background = isGood ? '#10b981' : '#ef4444';
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // تنسيق الصورة الرمزية
+  function renderAvatar(user) {
+    if (!user) return '👤';
+    if (user.avatarType === 'image' && user.avatarUrl) {
+      return `<img src="${user.avatarUrl}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.parentElement.innerHTML='👤'">`;
+    }
+    return user.emoji || '😎';
+  }
+
+  // تحميل بيانات المستخدم الحالي
+  async function loadCurrentUserData(uid) {
+    const userDoc = await getDoc(doc(db, "users", uid));
+    if (userDoc.exists()) {
+      currentUserData = userDoc.data();
+      currentUserData.uid = uid;
+    } else {
+      // fallback
+      currentUserData = { userId: uid.slice(0,6), username: 'مستخدم', emoji: '😎', colors: {frame:'#fbbf24'} };
+    }
+  }
+
+  // تحميل المتابعين (للتحقق من المتابعة)
+  async function loadFollowersData() {
+    const followersDoc = await getDoc(doc(db, "social", "followers"));
+    if (followersDoc.exists()) {
+      followersMap = followersDoc.data();
+    }
+    if (currentUser) {
+      followingList = followersMap[currentUser.uid] || [];
+    }
+  }
+
+  // جلب جميع المستخدمين لاستخدامهم في تفاصيل الإشعارات (لتسريع العرض)
+  async function fetchAllUsers() {
+    const usersMap = new Map();
+    const usersSnap = await getDocs(collection(db, "users"));
+    usersSnap.forEach(doc => {
+      const data = doc.data();
+      data.uid = doc.id;
+      usersMap.set(data.userId || doc.id.slice(0,6), data);
+    });
+    return usersMap;
+  }
+
+  // الوظيفة الأساسية: الاشتراك في الإشعارات
+  function subscribeToNotifications() {
+    if (!currentUser) return;
+    
+    const myUserId = currentUserData?.userId || currentUser.uid.slice(0,6);
+    const myUid = currentUser.uid;
+    
+    // الاستماع للأنشطة المتعلقة بي
+    // سنستمع لعدة مجموعات ونقوم بدمجها
+    
+    // 1. إشعارات منشورات (تعليقات, لايكات, مشاركات)
+    const postsQuery = query(collection(db, "posts"));
+    
+    // 2. إشعارات الستوريات
+    const storiesQuery = query(collection(db, "stories"));
+    
+    // 3. إشعارات المتابعة (سنراقب social/followers) ونحسب التغييرات محلياً
+    // سنقوم بتحميل followers ثم نقارن
+    
+    let previousFollowers = {};
+    
+    // دمج النتائج
+    const unsubscribePosts = onSnapshot(postsQuery, async (snapshot) => {
+      // سنقوم ببناء الإشعارات يدوياً مع كل تحديث
+      await buildNotificationsFromSnapshot();
+    });
+    
+    const unsubscribeStories = onSnapshot(storiesQuery, async () => {
+      await buildNotificationsFromSnapshot();
+    });
+    
+    const unsubscribeFollowers = onSnapshot(doc(db, "social", "followers"), async (docSnap) => {
+      if (docSnap.exists()) {
+        const newFollowers = docSnap.data();
+        // مقارنة المتابعين لإصدار إشعارات متابعة/إلغاء
+        await detectFollowChanges(previousFollowers, newFollowers);
+        previousFollowers = JSON.parse(JSON.stringify(newFollowers));
+        followersMap = newFollowers;
+        followingList = newFollowers[currentUser.uid] || [];
+        await buildNotificationsFromSnapshot();
+      } else {
+        followersMap = {};
+        followingList = [];
+        await buildNotificationsFromSnapshot();
+      }
+    });
+    
+    window.cleanupNotifications = () => {
+      unsubscribePosts();
+      unsubscribeStories();
+      unsubscribeFollowers();
+    };
+  }
+
+  // كشف تغييرات المتابعة
+  async function detectFollowChanges(oldMap, newMap) {
+    if (!currentUser) return;
+    const myUid = currentUser.uid;
+    const myUserId = currentUserData?.userId;
+    
+    const oldFollowing = oldMap[myUid] || [];
+    const newFollowing = newMap[myUid] || [];
+    
+    // متابعة جديدة
+    const added = newFollowing.filter(id => !oldFollowing.includes(id));
+    // إلغاء متابعة
+    const removed = oldFollowing.filter(id => !newFollowing.includes(id));
+    
+    // أيضًا من تابعني
+    const oldFollowers = Object.entries(oldMap).filter(([uid, list]) => list.includes(myUserId)).map(([uid]) => uid);
+    const newFollowers = Object.entries(newMap).filter(([uid, list]) => list.includes(myUserId)).map(([uid]) => uid);
+    
+    const newFollowedMe = newFollowers.filter(uid => !oldFollowers.includes(uid));
+    const unfollowedMe = oldFollowers.filter(uid => !newFollowers.includes(uid));
+    
+    // نضيف إشعارات فورية (لكن buildNotifications ستضيفها أيضاً)
+  }
+
+  // بناء قائمة الإشعارات من البيانات الحية
+  async function buildNotificationsFromSnapshot() {
+    if (!currentUser || !currentUserData) return;
+    
+    const myUserId = currentUserData.userId || currentUser.uid.slice(0,6);
+    const myUid = currentUser.uid;
+    
+    // جلب جميع المنشورات والستوريات
+    const postsSnap = await getDocs(collection(db, "posts"));
+    const storiesSnap = await getDocs(collection(db, "stories"));
+    
+    const posts = [];
+    postsSnap.forEach(d => { posts.push({id: d.id, ...d.data()}); });
+    const stories = [];
+    storiesSnap.forEach(d => { stories.push({id: d.id, ...d.data()}); });
+    
+    // تجميع المستخدمين
+    const usersMap = await fetchAllUsers();
+    
+    const notifications = [];
+    const now = Date.now();
+    
+    // 1. إشعارات التعليقات على منشوراتي
+    posts.filter(p => p.userId === myUserId).forEach(post => {
+      (post.comments || []).forEach(c => {
+        if (c.userId === myUserId) return; // لا إشعار من نفسي
+        notifications.push({
+          id: `comment_${post.id}_${c.timestamp || now}`,
+          type: 'comment',
+          actorId: c.userId,
+          actorUsername: c.username,
+          actorEmoji: c.emoji,
+          actorAvatarType: c.avatarType,
+          actorAvatarUrl: c.avatarUrl,
+          actorColors: c.colors,
+          actorVerified: c.verified,
+          targetPostId: post.id,
+          targetPostContent: post.content,
+          targetPostMedia: post.mediaUrl,
+          timestamp: c.timestamp || now,
+          text: c.text
+        });
+      });
+    });
+    
+    // 2. إعجابات على منشوراتي
+    posts.filter(p => p.userId === myUserId).forEach(post => {
+      (post.likedBy || []).forEach(uid => {
+        // نبحث عن بيانات المستخدم
+        const actor = usersMap.get(uid.slice(0,6)) || { username: 'مستخدم', emoji: '👤' };
+        if (uid === myUid) return;
+        notifications.push({
+          id: `like_${post.id}_${uid}`,
+          type: 'like',
+          actorId: actor.userId || uid.slice(0,6),
+          actorUsername: actor.username,
+          actorEmoji: actor.emoji,
+          actorAvatarType: actor.avatarType,
+          actorAvatarUrl: actor.avatarUrl,
+          actorColors: actor.colors,
+          actorVerified: actor.verified,
+          targetPostId: post.id,
+          targetPostContent: post.content,
+          timestamp: post.likesTimestamp?.[uid] || post.timestamp || now,
+        });
+      });
+    });
+    
+    // 3. مشاركات منشوراتي (نفترض أن shares عبارة عن عداد، لكن قد نضيف قريبا sharedBy)
+    // في الوقت الحالي نضيف فقط إذا كان هناك حقل sharedBy (إذا أضفناه لاحقًا)
+    
+    // 4. متابعة جديدة (من يتابعني)
+    const myFollowers = Object.entries(followersMap).filter(([uid, list]) => list.includes(myUserId)).map(([uid]) => uid);
+    for (const followerUid of myFollowers) {
+      const actor = usersMap.get(followerUid.slice(0,6)) || await getDoc(doc(db, "users", followerUid)).then(d => d.data()) || { username: 'مستخدم', emoji: '👤' };
+      notifications.push({
+        id: `follow_${followerUid}`,
+        type: 'follow',
+        actorId: actor.userId || followerUid.slice(0,6),
+        actorUsername: actor.username,
+        actorEmoji: actor.emoji,
+        actorAvatarType: actor.avatarType,
+        actorAvatarUrl: actor.avatarUrl,
+        actorColors: actor.colors,
+        actorVerified: actor.verified,
+        timestamp: now // ممكن تخزين وقت المتابعة لاحقاً
+      });
+    }
+    
+    // 5. إلغاء المتابعة (نتجاهل أو نضيف إشعار منفصل)
+    
+    // 6. ستوريات جديدة من المتابعين
+    const followingIds = followingList;
+    const recentStories = stories.filter(s => followingIds.includes(s.userId) && s.timestamp > now - 86400000);
+    recentStories.forEach(story => {
+      notifications.push({
+        id: `story_${story.id}`,
+        type: 'story',
+        actorId: story.userId,
+        actorUsername: story.username,
+        actorEmoji: story.emoji,
+        actorAvatarType: story.avatarType,
+        actorAvatarUrl: story.avatarUrl,
+        actorColors: story.colors,
+        storyId: story.id,
+        storyMedia: story.mediaUrl,
+        storyText: story.text,
+        timestamp: story.timestamp,
+      });
+    });
+    
+    // 7. تعليقات على ستورياتي
+    stories.filter(s => s.userId === myUserId).forEach(story => {
+      (story.comments || []).forEach(c => {
+        if (c.userId === myUserId) return;
+        notifications.push({
+          id: `story_comment_${story.id}_${c.timestamp}`,
+          type: 'comment',
+          subType: 'story',
+          actorId: c.userId,
+          actorUsername: c.username,
+          actorEmoji: c.emoji,
+          actorAvatarType: c.avatarType,
+          actorAvatarUrl: c.avatarUrl,
+          actorColors: c.colors,
+          targetStoryId: story.id,
+          storyText: story.text,
+          timestamp: c.timestamp,
+          text: c.text
+        });
+      });
+    });
+    
+    // 8. منشورات جديدة من المتابعين
+    const recentPosts = posts.filter(p => followingIds.includes(p.userId) && p.timestamp > now - 86400000*2);
+    recentPosts.forEach(post => {
+      notifications.push({
+        id: `newpost_${post.id}`,
+        type: 'post',
+        actorId: post.userId,
+        actorUsername: post.username,
+        actorEmoji: post.emoji,
+        actorAvatarType: post.avatarType,
+        actorAvatarUrl: post.avatarUrl,
+        actorColors: post.colors,
+        targetPostId: post.id,
+        targetPostContent: post.content,
+        timestamp: post.timestamp,
+      });
+    });
+    
+    // ترتيب حسب الوقت تنازلياً وإزالة التكرارات
+    const uniqueMap = new Map();
+    notifications.sort((a,b) => (b.timestamp||0) - (a.timestamp||0)).forEach(n => {
+      if (!uniqueMap.has(n.id)) uniqueMap.set(n.id, n);
+    });
+    
+    allNotifications = Array.from(uniqueMap.values());
+    renderFilteredNotifications();
+  }
+
+  // عرض الإشعارات مع الفلتر
+  function renderFilteredNotifications() {
+    let filtered = [...allNotifications];
+    
+    if (activeFilter !== 'all') {
+      filtered = filtered.filter(n => n.type === activeFilter || n.subType === activeFilter);
+    }
+    
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-bell-slash"></i>
+          <h3>لا توجد إشعارات</h3>
+          <p>لم يصلك أي إشعار حتى الآن</p>
+        </div>
+      `;
+      return;
+    }
+    
+    let html = '';
+    filtered.forEach(notif => {
+      const actor = {
+        username: notif.actorUsername || 'مستخدم',
+        emoji: notif.actorEmoji || '👤',
+        avatarType: notif.actorAvatarType,
+        avatarUrl: notif.actorAvatarUrl,
+        colors: notif.actorColors || {frame:'#fbbf24'},
+        verified: notif.actorVerified || false,
+        userId: notif.actorId
+      };
+      
+      const timeStr = notif.timestamp ? new Date(notif.timestamp).toLocaleString('ar-SA', {hour:'2-digit', minute:'2-digit', day:'numeric', month:'numeric'}) : '';
+      
+      let actionText = '';
+      let actionIcon = '';
+      let previewHtml = '';
+      
+      if (notif.type === 'like') {
+        actionIcon = '❤️';
+        actionText = 'أعجب بمنشورك';
+        previewHtml = `<div class="notif-preview" onclick="window.openPost('${notif.targetPostId}')"><i class="fas fa-file-alt"></i> ${notif.targetPostContent?.substring(0,80) || 'منشور'} ...</div>`;
+      } else if (notif.type === 'comment') {
+        actionIcon = '💬';
+        actionText = notif.subType === 'story' ? 'علّق على ستوريك' : 'علّق على منشورك';
+        previewHtml = `<div class="notif-preview" onclick="window.${notif.subType === 'story' ? `viewStory('${notif.targetStoryId}')` : `openComments('${notif.targetPostId}')`}"><i class="fas fa-comment-dots"></i> "${notif.text?.substring(0,60)}"</div>`;
+      } else if (notif.type === 'follow') {
+        actionIcon = '👥';
+        actionText = 'تابعك';
+      } else if (notif.type === 'story') {
+        actionIcon = '📸';
+        actionText = 'نشر ستوري جديد';
+        previewHtml = `<div class="story-preview-badge" onclick="window.viewStory('${notif.storyId}')"><i class="fas fa-play"></i> مشاهدة الستوري</div>`;
+      } else if (notif.type === 'post') {
+        actionIcon = '📝';
+        actionText = 'نشر منشوراً جديداً';
+        previewHtml = `<div class="notif-preview" onclick="window.openPost('${notif.targetPostId}')"><i class="fas fa-newspaper"></i> ${notif.targetPostContent?.substring(0,80) || 'منشور'} ...</div>`;
+      } else if (notif.type === 'share') {
+        actionIcon = '🔁';
+        actionText = 'شارك منشورك';
+      }
+      
+      html += `
+        <div class="notification-card">
+          <div class="notif-avatar" style="border-color: ${actor.colors?.frame || '#fbbf24'};" onclick="window.openProfile('${actor.userId}')">
+            ${actor.avatarType === 'image' && actor.avatarUrl ? `<img src="${actor.avatarUrl}">` : actor.emoji}
+          </div>
+          <div class="notif-content">
+            <div class="notif-header">
+              <span class="actor-name" onclick="window.openProfile('${actor.userId}')">
+                ${actor.username} ${actor.verified ? '<i class="fas fa-check-circle verified-icon"></i>' : ''}
+              </span>
+              <span class="user-badge" style="background:${actor.colors?.frame || '#fbbf24'};">#${actor.userId}</span>
+              <span class="notif-action"><i class="fas ${getActionIconClass(notif.type)}"></i> ${actionText}</span>
+              <span class="notif-time"><i class="far fa-clock"></i> ${timeStr}</span>
+            </div>
+            ${previewHtml}
+          </div>
+        </div>
+      `;
+    });
+    
+    container.innerHTML = html;
+  }
+  
+  function getActionIconClass(type) {
+    const map = { like: 'fa-heart', comment: 'fa-comment', follow: 'fa-user-plus', story: 'fa-clock', post: 'fa-feather', share: 'fa-share' };
+    return map[type] || 'fa-bell';
+  }
+
+  // تهيئة الفلاتر
+  function initFilters() {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => { b.classList.remove('active', 'all-active'); });
+        btn.classList.add('active');
+        if (btn.dataset.filter === 'all') btn.classList.add('all-active');
+        activeFilter = btn.dataset.filter;
+        renderFilteredNotifications();
+      });
+    });
+  }
+
+  // دوال مساعدة للتفاعل
+  window.openProfile = (userId) => {
+    localStorage.setItem('openProfileId', userId);
+    window.location.href = 'index.html';
+  };
+  window.openPost = (postId) => {
+    localStorage.setItem('openPostId', postId);
+    window.location.href = 'index.html';
+  };
+  window.openComments = (postId) => {
+    localStorage.setItem('openCommentsId', postId);
+    window.location.href = 'index.html';
+  };
+  window.viewStory = (storyId) => {
+    localStorage.setItem('openStoryId', storyId);
+    window.location.href = 'index.html';
+  };
+
+  // عند تحميل الصفحة
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      currentUser = user;
+      await loadCurrentUserData(user.uid);
+      await loadFollowersData();
+      subscribeToNotifications();
+      initFilters();
+      // تنفيذ أولي
+      setTimeout(() => buildNotificationsFromSnapshot(), 300);
+    } else {
+      container.innerHTML = `<div class="empty-state"><i class="fas fa-sign-in-alt"></i><h3>يرجى تسجيل الدخول</h3></div>`;
+    }
+  });
+
+  // تنظيف عند مغادرة الصفحة
+  window.addEventListener('beforeunload', () => {
+    if (window.cleanupNotifications) window.cleanupNotifications();
+  });
+</script>
+</body>
+</html>
