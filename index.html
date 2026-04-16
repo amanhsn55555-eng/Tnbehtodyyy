@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>🔔 الإشعارات • منصتي</title>
-  <!-- Font Awesome & Google Fonts -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
   <style>
@@ -15,115 +14,6 @@
       font-family: 'Tajawal', sans-serif;
     }
 
-  /* ========== هيدر التصفية الأفقي الجديد (يُغني عن الهيدر القديم) ========== */
-  .notification-card{background:linear-gradient(145deg,#f8fafc,#e2e8f0)!important;border:none!important;box-shadow:inset 2px 2px 5px #ffffff,inset -2px -2px 5px #94a3b8,3px 3px 8px rgba(0,0,0,0.1),-1px -1px 4px rgba(255,255,255,0.6)!important;border-radius:20px!important;padding:16px 14px!important;margin-bottom:16px!important;color:#1e293b!important;text-shadow:1px 1px 2px rgba(255,255,255,0.8),-1px -1px 2px rgba(0,0,0,0.1)!important;transform:none!important;transition:none!important}
-  
-  .filter-section{background:transparent!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:none!important;border-bottom:none!important;padding:5px 10px!important}.filter-btn{flex-shrink:0!important;background:linear-gradient(145deg,#f8fafc,#e2e8f0)!important;border:none!important;box-shadow:inset 2px 2px 5px #ffffff,inset -2px -2px 5px #94a3b8,3px 3px 8px rgba(0,0,0,0.1),-1px -1px 4px rgba(255,255,255,0.6)!important;border-radius:30px!important;padding:6px 14px!important;font-size:12px!important;font-weight:700!important;color:#1e293b!important;text-shadow:1px 1px 2px rgba(255,255,255,0.8),-1px -1px 2px rgba(0,0,0,0.1)!important;transform:none!important;transition:none!important}.filter-btn i{font-size:12px!important;color:#64748b!important;text-shadow:1px 1px 2px rgba(255,255,255,0.8)!important}.filter-btn.active,.filter-btn.all-active{background:linear-gradient(145deg,#fbbf24,#d97706)!important;color:#0f172a!important;box-shadow:inset 2px 2px 5px #fef3c7,inset -2px -2px 5px #b45309,3px 3px 8px rgba(0,0,0,0.15),-1px -1px 4px rgba(255,255,255,0.8)!important}.filter-btn.active i,.filter-btn.all-active i{color:#0f172a!important}
-.filter-section {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  overflow-y: hidden;
-  gap: 8px;
-  margin: 0 -12px 20px -12px; /* تمدد لكامل عرض الشاشة */
-  padding: 12px 16px;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-radius: 0;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  border-bottom: 1px solid rgba(251, 191, 36, 0.25);
-  scrollbar-width: thin;
-  scrollbar-color: #fbbf24 #e2e8f0;
-  white-space: nowrap;
-}
-
-/* إخفاء شريط التمرير في المتصفحات التي تدعمه (يظهر عند التمرير فقط) */
-.filter-section::-webkit-scrollbar {
-  height: 4px;
-  background: transparent;
-}
-.filter-section::-webkit-scrollbar-thumb {
-  background: #fbbf24;
-  border-radius: 20px;
-}
-.filter-section::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 20px;
-}
-
-/* أزرار التصفية داخل المستطيل */
-.filter-btn {
-  flex-shrink: 0; /* يمنع انكماش الأزرار */
-  background: white;
-  border: none;
-  padding: 10px 18px;
-  border-radius: 40px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #1e293b;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.03);
-  cursor: pointer;
-  transition: all 0.2s;
-  border: 1px solid #eef2f6;
-  white-space: nowrap;
-}
-
-/* تنسيق الزر النشط */
-.filter-btn.active,
-.filter-btn.all-active {
-  background: #1e293b;
-  color: white;
-  border-color: #fbbf24;
-  box-shadow: 0 6px 14px rgba(251, 191, 36, 0.2);
-}
-
-/* إخفاء الهيدر القديم (الـ notify-header) */
-.notify-header {
-  display: none !important;
-}
-
-/* تعديل بسيط ليكون زر الرجوع داخل شريط التصفية أو منفصلاً - اختياري */
-/* يمكنك إضافة زر الرجوع داخل نفس السطر إذا أردت */
-.filter-section::before {
-  content: "←";
-  display: inline-block;
-  background: white;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: bold;
-  color: #fbbf24;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-  cursor: pointer;
-  border: 1px solid rgba(251,191,36,0.2);
-  margin-left: 8px;
-  flex-shrink: 0;
-}
-.filter-section::before:hover {
-  background: #f8fafc;
-}
-/* اجعل العنصر الوهمي قابلاً للنقر */
-.filter-section {
-  cursor: default;
-}
-.filter-section::before {
-  cursor: pointer;
-}
-/* ربط العنصر الوهمي بوظيفة الرجوع */
-.filter-section[onclick]::before {
-  pointer-events: none;
-}
     body {
       background: linear-gradient(145deg, #f5f7fa 0%, #e8eef5 100%);
       min-height: 100vh;
@@ -131,103 +21,77 @@
       color: #01172a;
     }
 
-    /* الهيدر */
-    .notify-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding: 8px 0;
-    }
-
-    .notify-header h2 {
-      font-size: 28px;
-      font-weight: 800;
-      background: linear-gradient(135deg, #1e293b, #0f172a);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .back-btn {
-      width: 45px;
-      height: 45px;
-      border-radius: 50%;
-      background: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      color: #fbbf24;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-      cursor: pointer;
-      transition: 0.2s;
-      border: 1px solid rgba(251,191,36,0.2);
+    .notification-card {
+      background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important;
+      border: none !important;
+      box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important;
+      border-radius: 20px !important;
+      padding: 16px 14px !important;
+      margin-bottom: 16px !important;
+      color: #1e293b !important;
     }
 
     .filter-section {
+      position: sticky;
+      top: 0;
+      z-index: 100;
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      overflow-x: auto;
       gap: 8px;
-      margin-bottom: 20px;
-      background: rgba(255,255,255,0.6);
-      backdrop-filter: blur(10px);
-      padding: 12px;
-      border-radius: 30px;
+      margin: 0 -12px 20px -12px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+      white-space: nowrap;
+    }
+
+    .filter-section::-webkit-scrollbar {
+      height: 4px;
+      background: transparent;
+    }
+    .filter-section::-webkit-scrollbar-thumb {
+      background: #fbbf24;
+      border-radius: 20px;
     }
 
     .filter-btn {
-      background: white;
-      border: none;
-      padding: 8px 14px;
-      border-radius: 40px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #334155;
-      display: flex;
+      flex-shrink: 0;
+      background: linear-gradient(145deg, #f8fafc, #e2e8f0) !important;
+      border: none !important;
+      box-shadow: inset 2px 2px 5px #ffffff, inset -2px -2px 5px #94a3b8, 3px 3px 8px rgba(0,0,0,0.1), -1px -1px 4px rgba(255,255,255,0.6) !important;
+      border-radius: 30px !important;
+      padding: 10px 18px !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+      color: #1e293b !important;
+      display: inline-flex;
       align-items: center;
-      gap: 6px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.03);
+      gap: 8px;
       cursor: pointer;
-      transition: all 0.2s;
-      border: 1px solid #e2e8f0;
+      white-space: nowrap;
     }
 
-    .filter-btn i { font-size: 14px; }
-    .filter-btn.active {
-      background: #1e293b;
-      color: white;
-      border-color: #fbbf24;
+    .filter-btn i {
+      font-size: 14px !important;
+      color: #64748b !important;
     }
 
-    .filter-btn.all-active {
-      background: #fbbf24;
-      color: #0f172a;
-      font-weight: 800;
+    .filter-btn.active, .filter-btn.all-active {
+      background: #1e293b !important;
+      color: white !important;
+      box-shadow: 0 6px 14px rgba(251, 191, 36, 0.2) !important;
     }
 
-    /* بطاقة الإشعار */
-    .notification-card {
-      background: white;
-      border-radius: 24px;
-      padding: 16px;
-      margin-bottom: 14px;
-      box-shadow: 0 8px 20px -6px rgba(0, 20, 40, 0.08);
-      display: flex;
-      align-items: flex-start;
-      gap: 14px;
-      border: 1px solid rgba(255,255,255,0.8);
-      transition: 0.15s;
-      animation: fadeIn 0.3s ease;
-      position: relative;
+    .filter-btn.active i, .filter-btn.all-active i {
+      color: #fbbf24 !important;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
+    .notify-header {
+      display: none !important;
     }
 
     .notif-avatar {
@@ -320,20 +184,101 @@
       transition: 0.15s;
     }
 
-    .notif-preview i {
-      margin-left: 6px;
-      color: #fbbf24;
+    /* أزرار دعوة الارتباط */
+    .connection-request-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 12px;
     }
 
-    .story-preview-badge {
-      background: linear-gradient(135deg, #fef3c7, #fde68a);
-      display: inline-block;
+    .accept-btn, .reject-btn {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .accept-btn {
+      background: linear-gradient(145deg, #10b981, #059669);
+      color: white;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+    }
+
+    .reject-btn {
+      background: linear-gradient(145deg, #ef4444, #dc2626);
+      color: white;
+      box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+    }
+
+    .viewer-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(145deg, #e0e7ff, #c7d2fe);
       padding: 6px 14px;
-      border-radius: 40px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #3730a3;
+      margin-top: 8px;
+      cursor: pointer;
+      border: 1px solid #a5b4fc;
+    }
+
+    .share-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(145deg, #fef3c7, #fde68a);
+      padding: 6px 14px;
+      border-radius: 30px;
       font-size: 12px;
       font-weight: 700;
       color: #92400e;
+      margin-top: 8px;
       cursor: pointer;
+      border: 1px solid #fcd34d;
+    }
+
+    .unfollow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: linear-gradient(145deg, #fee2e2, #fecaca);
+      padding: 6px 14px;
+      border-radius: 30px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #991b1b;
+      margin-top: 8px;
+      cursor: pointer;
+      border: 1px solid #f87171;
+    }
+
+    .back-btn-filter {
+      flex-shrink: 0;
+      background: white;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      color: #fbbf24;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      cursor: pointer;
+      border: 1px solid rgba(251,191,36,0.2);
+      margin-left: 8px;
     }
 
     .empty-state {
@@ -370,25 +315,39 @@
       font-weight: 600;
       font-size: 14px;
     }
-    #toastMsg.show { opacity: 1; bottom: 40px; }
+
+    #toastMsg.show {
+      opacity: 1;
+      bottom: 40px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
 
 <div id="toastMsg"></div>
 
-<div class="notify-header">
-  <h2><i class="fas fa-bell" style="color: #fbbf24;"></i> الإشعارات</h2>
-  <div class="back-btn" onclick="window.location.href='index.html'">
+<!-- شريط التصفية -->
+<div class="filter-section">
+  <div class="back-btn-filter" onclick="window.location.href='index.html'">
     <i class="fas fa-arrow-right"></i>
   </div>
+  <button class="filter-btn all-active" data-filter="all"><i class="fas fa-list"></i> الكل</button>
+  <button class="filter-btn" data-filter="like"><i class="fas fa-heart"></i> إعجاب</button>
+  <button class="filter-btn" data-filter="comment"><i class="fas fa-comment"></i> تعليق</button>
+  <button class="filter-btn" data-filter="follow"><i class="fas fa-user-plus"></i> متابعة</button>
+  <button class="filter-btn" data-filter="unfollow"><i class="fas fa-user-minus"></i> إلغاء</button>
+  <button class="filter-btn" data-filter="story"><i class="fas fa-clock"></i> ستوري</button>
+  <button class="filter-btn" data-filter="share"><i class="fas fa-share"></i> مشاركة</button>
+  <button class="filter-btn" data-filter="post"><i class="fas fa-feather"></i> منشور</button>
+  <button class="filter-btn" data-filter="connection"><i class="fas fa-link"></i> ارتباط</button>
+  <button class="filter-btn" data-filter="view"><i class="fas fa-eye"></i> مشاهدات</button>
 </div>
 
-<!-- أزرار التصفية -->
-  <div style="display:flex;flex-wrap:nowrap;overflow-x:auto;gap:8px;padding:12px 16px;white-space:nowrap;scrollbar-width:thin;background:rgba(255,255,255,0.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(251,191,36,0.25)"><button class="filter-btn all-active" data-filter="all" style="flex-shrink:0"><i class="fas fa-list"></i> الكل</button><button class="filter-btn" data-filter="like" style="flex-shrink:0"><i class="fas fa-heart"></i> إعجاب</button><button class="filter-btn" data-filter="comment" style="flex-shrink:0"><i class="fas fa-comment"></i> تعليق</button><button class="filter-btn" data-filter="follow" style="flex-shrink:0"><i class="fas fa-user-plus"></i> متابعة</button><button class="filter-btn" data-filter="unfollow" style="flex-shrink:0"><i class="fas fa-user-minus"></i> إلغاء</button><button class="filter-btn" data-filter="story" style="flex-shrink:0"><i class="fas fa-clock"></i> ستوري</button><button class="filter-btn" data-filter="share" style="flex-shrink:0"><i class="fas fa-share"></i> مشاركة</button><button class="filter-btn" data-filter="post" style="flex-shrink:0"><i class="fas fa-feather"></i> منشور</button></div>
-  
-
-<!-- حاوية الإشعارات -->
 <div id="notificationsContainer">
   <div style="text-align:center; padding: 40px; color: #64748b;">
     <i class="fas fa-spinner fa-pulse" style="font-size: 30px; margin-bottom: 15px;"></i>
@@ -399,7 +358,7 @@
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-app.js";
   import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-auth.js";
-  import { getFirestore, collection, query, where, orderBy, onSnapshot, doc, getDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
+  import { getFirestore, collection, query, where, onSnapshot, doc, getDoc, getDocs, updateDoc, arrayUnion, arrayRemove, deleteField, setDoc } from "https://www.gstatic.com/firebasejs/10.12.3/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDYKCCTcurNcJslrNKqdiJCoIIK-YZArB4",
@@ -415,12 +374,12 @@
 
   let currentUser = null;
   let currentUserData = null;
-  let followersMap = {};       // followers[uid] = [userId, ...]
-  let followingList = [];      // قائمة معرفات اللي انا متابعهم
+  let followersMap = {};
+  let followingList = [];
   let allNotifications = [];
   let activeFilter = 'all';
-  
-  // مراجع الـ DOM
+  let usersMap = new Map();
+
   const container = document.getElementById('notificationsContainer');
   const filterBtns = document.querySelectorAll('.filter-btn');
 
@@ -432,28 +391,16 @@
     setTimeout(() => t.classList.remove('show'), 2500);
   }
 
-  // تنسيق الصورة الرمزية
-  function renderAvatar(user) {
-    if (!user) return '👤';
-    if (user.avatarType === 'image' && user.avatarUrl) {
-      return `<img src="${user.avatarUrl}" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" onerror="this.parentElement.innerHTML='👤'">`;
-    }
-    return user.emoji || '😎';
-  }
-
-  // تحميل بيانات المستخدم الحالي
   async function loadCurrentUserData(uid) {
     const userDoc = await getDoc(doc(db, "users", uid));
     if (userDoc.exists()) {
       currentUserData = userDoc.data();
       currentUserData.uid = uid;
     } else {
-      // fallback
       currentUserData = { userId: uid.slice(0,6), username: 'مستخدم', emoji: '😎', colors: {frame:'#fbbf24'} };
     }
   }
 
-  // تحميل المتابعين (للتحقق من المتابعة)
   async function loadFollowersData() {
     const followersDoc = await getDoc(doc(db, "social", "followers"));
     if (followersDoc.exists()) {
@@ -464,9 +411,7 @@
     }
   }
 
-  // جلب جميع المستخدمين لاستخدامهم في تفاصيل الإشعارات (لتسريع العرض)
   async function fetchAllUsers() {
-    const usersMap = new Map();
     const usersSnap = await getDocs(collection(db, "users"));
     usersSnap.forEach(doc => {
       const data = doc.data();
@@ -476,110 +421,164 @@
     return usersMap;
   }
 
-  // الوظيفة الأساسية: الاشتراك في الإشعارات
-  function subscribeToNotifications() {
-    if (!currentUser) return;
+  // ========== قبول طلب الارتباط (نسخة محسنة) ==========
+  async function acceptConnectionRequest(requesterId, requesterUid) {
+    if (!currentUser || !currentUserData) return;
     
-    const myUserId = currentUserData?.userId || currentUser.uid.slice(0,6);
-    const myUid = currentUser.uid;
-    
-    // الاستماع للأنشطة المتعلقة بي
-    // سنستمع لعدة مجموعات ونقوم بدمجها
-    
-    // 1. إشعارات منشورات (تعليقات, لايكات, مشاركات)
-    const postsQuery = query(collection(db, "posts"));
-    
-    // 2. إشعارات الستوريات
-    const storiesQuery = query(collection(db, "stories"));
-    
-    // 3. إشعارات المتابعة (سنراقب social/followers) ونحسب التغييرات محلياً
-    // سنقوم بتحميل followers ثم نقارن
-    
-    let previousFollowers = {};
-    
-    // دمج النتائج
-    const unsubscribePosts = onSnapshot(postsQuery, async (snapshot) => {
-      // سنقوم ببناء الإشعارات يدوياً مع كل تحديث
-      await buildNotificationsFromSnapshot();
-    });
-    
-    const unsubscribeStories = onSnapshot(storiesQuery, async () => {
-      await buildNotificationsFromSnapshot();
-    });
-    
-    const unsubscribeFollowers = onSnapshot(doc(db, "social", "followers"), async (docSnap) => {
-      if (docSnap.exists()) {
-        const newFollowers = docSnap.data();
-        // مقارنة المتابعين لإصدار إشعارات متابعة/إلغاء
-        await detectFollowChanges(previousFollowers, newFollowers);
-        previousFollowers = JSON.parse(JSON.stringify(newFollowers));
-        followersMap = newFollowers;
-        followingList = newFollowers[currentUser.uid] || [];
-        await buildNotificationsFromSnapshot();
-      } else {
-        followersMap = {};
-        followingList = [];
-        await buildNotificationsFromSnapshot();
+    try {
+      console.log('🔄 جاري قبول طلب الارتباط من:', requesterId);
+      
+      const myUid = currentUser.uid;
+      const myUserId = currentUserData.userId || myUid.slice(0,6);
+      
+      // جلب بياناتي
+      const myUserRef = doc(db, "users", myUid);
+      const myUserDoc = await getDoc(myUserRef);
+      const myData = myUserDoc.data() || {};
+      
+      // جلب بيانات مقدم الطلب
+      const requesterRef = doc(db, "users", requesterUid);
+      const requesterDoc = await getDoc(requesterRef);
+      const requesterData = requesterDoc.data() || {};
+      
+      if (!requesterData.userId) {
+        showToast('❌ المستخدم غير موجود', false);
+        return;
       }
-    });
-    
-    window.cleanupNotifications = () => {
-      unsubscribePosts();
-      unsubscribeStories();
-      unsubscribeFollowers();
-    };
+      
+      // ========== تحديث بياناتي ==========
+      await updateDoc(myUserRef, {
+        relationship: 'مرتبط',
+        partnerId: requesterData.userId || requesterId,
+        partnerName: requesterData.username || 'مستخدم',
+        partnerEmoji: requesterData.emoji || '👤',
+        partnerAvatarType: requesterData.avatarType || 'emoji',
+        partnerAvatarUrl: requesterData.avatarUrl || '',
+        partnerUid: requesterUid,
+        partnerRequest: deleteField()
+      });
+      
+      console.log('✅ تم تحديث بياناتي - أصبحت مرتبطاً مع:', requesterData.username);
+      
+      // ========== تحديث بيانات الطرف الآخر ==========
+      await updateDoc(requesterRef, {
+        relationship: 'مرتبط',
+        partnerId: myUserId,
+        partnerName: myData.username || 'مستخدم',
+        partnerEmoji: myData.emoji || '😎',
+        partnerAvatarType: myData.avatarType || 'emoji',
+        partnerAvatarUrl: myData.avatarUrl || '',
+        partnerUid: myUid
+      });
+      
+      console.log('✅ تم تحديث بيانات الطرف الآخر - أصبح مرتبطاً معي');
+      
+      // ========== إضافة إشعار قبول للطرف الآخر ==========
+      const otherNotifRef = doc(db, "notifications", requesterUid);
+      const otherNotifDoc = await getDoc(otherNotifRef);
+      
+      const acceptanceNotif = {
+        type: 'connection_accepted',
+        acceptorId: myUserId,
+        acceptorName: myData.username || 'مستخدم',
+        acceptorEmoji: myData.emoji || '😎',
+        acceptorAvatarType: myData.avatarType,
+        acceptorAvatarUrl: myData.avatarUrl,
+        acceptorColors: myData.colors,
+        timestamp: Date.now(),
+        message: `${myData.username || 'مستخدم'} قبل طلب الارتباط`
+      };
+      
+      let connectionAccepted = [];
+      if (otherNotifDoc.exists()) {
+        connectionAccepted = otherNotifDoc.data().connectionAccepted || [];
+      }
+      connectionAccepted.push(acceptanceNotif);
+      
+      await setDoc(otherNotifRef, { connectionAccepted: connectionAccepted }, { merge: true });
+      
+      // ========== حذف طلب الارتباط من إشعاراتي ==========
+      const myNotifRef = doc(db, "notifications", myUid);
+      const myNotifDoc = await getDoc(myNotifRef);
+      
+      if (myNotifDoc.exists()) {
+        const requests = myNotifDoc.data().connectionRequests || [];
+        const updated = requests.filter(r => r.requesterId !== requesterId);
+        await updateDoc(myNotifRef, { connectionRequests: updated });
+      }
+      
+      showToast('💑 تم قبول طلب الارتباط! أنت الآن مرتبط', true);
+      
+      // تحديث البيانات المحلية
+      currentUserData.relationship = 'مرتبط';
+      currentUserData.partnerId = requesterData.userId;
+      currentUserData.partnerName = requesterData.username;
+      currentUserData.partnerEmoji = requesterData.emoji;
+      
+      // إعادة تحميل الإشعارات
+      await buildNotificationsFromSnapshot();
+      
+      // فتح الملف الشخصي لإظهار التغيير
+      setTimeout(() => {
+        if (confirm('🎉 تم الارتباط بنجاح! هل تريد فتح ملفك الشخصي؟')) {
+          window.openProfile(myUserId);
+        }
+      }, 500);
+      
+    } catch (error) {
+      console.error('❌ خطأ في قبول الارتباط:', error);
+      showToast('❌ حدث خطأ: ' + error.message, false);
+    }
   }
 
-  // كشف تغييرات المتابعة
-  async function detectFollowChanges(oldMap, newMap) {
+  // ========== رفض طلب الارتباط ==========
+  async function rejectConnectionRequest(requesterId) {
     if (!currentUser) return;
-    const myUid = currentUser.uid;
-    const myUserId = currentUserData?.userId;
     
-    const oldFollowing = oldMap[myUid] || [];
-    const newFollowing = newMap[myUid] || [];
-    
-    // متابعة جديدة
-    const added = newFollowing.filter(id => !oldFollowing.includes(id));
-    // إلغاء متابعة
-    const removed = oldFollowing.filter(id => !newFollowing.includes(id));
-    
-    // أيضًا من تابعني
-    const oldFollowers = Object.entries(oldMap).filter(([uid, list]) => list.includes(myUserId)).map(([uid]) => uid);
-    const newFollowers = Object.entries(newMap).filter(([uid, list]) => list.includes(myUserId)).map(([uid]) => uid);
-    
-    const newFollowedMe = newFollowers.filter(uid => !oldFollowers.includes(uid));
-    const unfollowedMe = oldFollowers.filter(uid => !newFollowers.includes(uid));
-    
-    // نضيف إشعارات فورية (لكن buildNotifications ستضيفها أيضاً)
+    try {
+      const notifRef = doc(db, "notifications", currentUser.uid);
+      const notifDoc = await getDoc(notifRef);
+      
+      if (notifDoc.exists()) {
+        const requests = notifDoc.data().connectionRequests || [];
+        const updated = requests.filter(r => r.requesterId !== requesterId);
+        await updateDoc(notifRef, { connectionRequests: updated });
+      }
+      
+      showToast('تم رفض طلب الارتباط', true);
+      await buildNotificationsFromSnapshot();
+      
+    } catch (error) {
+      console.error('Error:', error);
+      showToast('❌ حدث خطأ', false);
+    }
   }
 
-  // بناء قائمة الإشعارات من البيانات الحية
+  // ========== بناء الإشعارات ==========
   async function buildNotificationsFromSnapshot() {
     if (!currentUser || !currentUserData) return;
     
     const myUserId = currentUserData.userId || currentUser.uid.slice(0,6);
     const myUid = currentUser.uid;
     
-    // جلب جميع المنشورات والستوريات
     const postsSnap = await getDocs(collection(db, "posts"));
     const storiesSnap = await getDocs(collection(db, "stories"));
+    const notifSnap = await getDoc(doc(db, "notifications", myUid));
     
     const posts = [];
     postsSnap.forEach(d => { posts.push({id: d.id, ...d.data()}); });
     const stories = [];
     storiesSnap.forEach(d => { stories.push({id: d.id, ...d.data()}); });
     
-    // تجميع المستخدمين
-    const usersMap = await fetchAllUsers();
+    await fetchAllUsers();
     
     const notifications = [];
     const now = Date.now();
     
-    // 1. إشعارات التعليقات على منشوراتي
+    // 1. إشعارات التعليقات
     posts.filter(p => p.userId === myUserId).forEach(post => {
       (post.comments || []).forEach(c => {
-        if (c.userId === myUserId) return; // لا إشعار من نفسي
+        if (c.userId === myUserId) return;
         notifications.push({
           id: `comment_${post.id}_${c.timestamp || now}`,
           type: 'comment',
@@ -592,17 +591,15 @@
           actorVerified: c.verified,
           targetPostId: post.id,
           targetPostContent: post.content,
-          targetPostMedia: post.mediaUrl,
           timestamp: c.timestamp || now,
           text: c.text
         });
       });
     });
     
-    // 2. إعجابات على منشوراتي
+    // 2. إعجابات
     posts.filter(p => p.userId === myUserId).forEach(post => {
       (post.likedBy || []).forEach(uid => {
-        // نبحث عن بيانات المستخدم
         const actor = usersMap.get(uid.slice(0,6)) || { username: 'مستخدم', emoji: '👤' };
         if (uid === myUid) return;
         notifications.push({
@@ -622,13 +619,30 @@
       });
     });
     
-    // 3. مشاركات منشوراتي (نفترض أن shares عبارة عن عداد، لكن قد نضيف قريبا sharedBy)
-    // في الوقت الحالي نضيف فقط إذا كان هناك حقل sharedBy (إذا أضفناه لاحقًا)
+    // 3. مشاركات
+    posts.filter(p => p.userId === myUserId).forEach(post => {
+      (post.sharedBy || []).forEach(share => {
+        notifications.push({
+          id: `share_${post.id}_${share.userId}_${share.timestamp}`,
+          type: 'share',
+          actorId: share.userId,
+          actorUsername: share.username,
+          actorEmoji: share.emoji,
+          actorAvatarType: share.avatarType,
+          actorAvatarUrl: share.avatarUrl,
+          actorColors: share.colors,
+          targetPostId: post.id,
+          targetPostContent: post.content,
+          timestamp: share.timestamp || now,
+          shareComment: share.comment
+        });
+      });
+    });
     
-    // 4. متابعة جديدة (من يتابعني)
+    // 4. متابعة جديدة
     const myFollowers = Object.entries(followersMap).filter(([uid, list]) => list.includes(myUserId)).map(([uid]) => uid);
     for (const followerUid of myFollowers) {
-      const actor = usersMap.get(followerUid.slice(0,6)) || await getDoc(doc(db, "users", followerUid)).then(d => d.data()) || { username: 'مستخدم', emoji: '👤' };
+      const actor = usersMap.get(followerUid.slice(0,6)) || { username: 'مستخدم', emoji: '👤' };
       notifications.push({
         id: `follow_${followerUid}`,
         type: 'follow',
@@ -639,13 +653,24 @@
         actorAvatarUrl: actor.avatarUrl,
         actorColors: actor.colors,
         actorVerified: actor.verified,
-        timestamp: now // ممكن تخزين وقت المتابعة لاحقاً
+        timestamp: now
       });
     }
     
-    // 5. إلغاء المتابعة (نتجاهل أو نضيف إشعار منفصل)
+    // 5. إلغاء المتابعة
+    const unfollowNotifications = JSON.parse(localStorage.getItem('unfollow_notifications') || '[]');
+    unfollowNotifications.forEach(unfollow => {
+      notifications.push({
+        id: `unfollow_${unfollow.userId}_${unfollow.timestamp}`,
+        type: 'unfollow',
+        actorId: unfollow.userId,
+        actorUsername: unfollow.username,
+        actorEmoji: unfollow.emoji,
+        timestamp: unfollow.timestamp
+      });
+    });
     
-    // 6. ستوريات جديدة من المتابعين
+    // 6. ستوريات جديدة
     const followingIds = followingList;
     const recentStories = stories.filter(s => followingIds.includes(s.userId) && s.timestamp > now - 86400000);
     recentStories.forEach(story => {
@@ -659,35 +684,11 @@
         actorAvatarUrl: story.avatarUrl,
         actorColors: story.colors,
         storyId: story.id,
-        storyMedia: story.mediaUrl,
-        storyText: story.text,
         timestamp: story.timestamp,
       });
     });
     
-    // 7. تعليقات على ستورياتي
-    stories.filter(s => s.userId === myUserId).forEach(story => {
-      (story.comments || []).forEach(c => {
-        if (c.userId === myUserId) return;
-        notifications.push({
-          id: `story_comment_${story.id}_${c.timestamp}`,
-          type: 'comment',
-          subType: 'story',
-          actorId: c.userId,
-          actorUsername: c.username,
-          actorEmoji: c.emoji,
-          actorAvatarType: c.avatarType,
-          actorAvatarUrl: c.avatarUrl,
-          actorColors: c.colors,
-          targetStoryId: story.id,
-          storyText: story.text,
-          timestamp: c.timestamp,
-          text: c.text
-        });
-      });
-    });
-    
-    // 8. منشورات جديدة من المتابعين
+    // 7. منشورات جديدة
     const recentPosts = posts.filter(p => followingIds.includes(p.userId) && p.timestamp > now - 86400000*2);
     recentPosts.forEach(post => {
       notifications.push({
@@ -705,7 +706,44 @@
       });
     });
     
-    // ترتيب حسب الوقت تنازلياً وإزالة التكرارات
+    // 8. دعوات الارتباط
+    if (notifSnap.exists()) {
+      const connectionRequests = notifSnap.data().connectionRequests || [];
+      connectionRequests.forEach(req => {
+        notifications.push({
+          id: `connection_${req.requesterId}_${req.timestamp}`,
+          type: 'connection',
+          actorId: req.requesterId,
+          actorUsername: req.requesterName,
+          actorEmoji: req.requesterEmoji,
+          actorAvatarType: req.avatarType,
+          actorAvatarUrl: req.avatarUrl,
+          actorColors: req.colors,
+          timestamp: req.timestamp,
+          requesterUid: req.requesterUid
+        });
+      });
+    }
+    
+    // 9. مشاهدات الملف الشخصي
+    if (notifSnap.exists()) {
+      const profileViews = notifSnap.data().profileViews || [];
+      profileViews.forEach(view => {
+        notifications.push({
+          id: `view_${view.viewerId}_${view.timestamp}`,
+          type: 'view',
+          actorId: view.viewerId,
+          actorUsername: view.viewerName,
+          actorEmoji: view.viewerEmoji,
+          actorAvatarType: view.avatarType,
+          actorAvatarUrl: view.avatarUrl,
+          actorColors: view.colors,
+          timestamp: view.timestamp
+        });
+      });
+    }
+    
+    // ترتيب وإزالة التكرار
     const uniqueMap = new Map();
     notifications.sort((a,b) => (b.timestamp||0) - (a.timestamp||0)).forEach(n => {
       if (!uniqueMap.has(n.id)) uniqueMap.set(n.id, n);
@@ -715,7 +753,6 @@
     renderFilteredNotifications();
   }
 
-  // عرض الإشعارات مع الفلتر
   function renderFilteredNotifications() {
     let filtered = [...allNotifications];
     
@@ -749,31 +786,59 @@
       const timeStr = notif.timestamp ? new Date(notif.timestamp).toLocaleString('ar-SA', {hour:'2-digit', minute:'2-digit', day:'numeric', month:'numeric'}) : '';
       
       let actionText = '';
-      let actionIcon = '';
       let previewHtml = '';
+      let extraActions = '';
       
       if (notif.type === 'like') {
-        actionIcon = '❤️';
         actionText = 'أعجب بمنشورك';
         previewHtml = `<div class="notif-preview" onclick="window.openPost('${notif.targetPostId}')"><i class="fas fa-file-alt"></i> ${notif.targetPostContent?.substring(0,80) || 'منشور'} ...</div>`;
       } else if (notif.type === 'comment') {
-        actionIcon = '💬';
-        actionText = notif.subType === 'story' ? 'علّق على ستوريك' : 'علّق على منشورك';
-        previewHtml = `<div class="notif-preview" onclick="window.${notif.subType === 'story' ? `viewStory('${notif.targetStoryId}')` : `openComments('${notif.targetPostId}')`}"><i class="fas fa-comment-dots"></i> "${notif.text?.substring(0,60)}"</div>`;
+        actionText = 'علّق على منشورك';
+        previewHtml = `<div class="notif-preview" onclick="window.openComments('${notif.targetPostId}')"><i class="fas fa-comment-dots"></i> "${notif.text?.substring(0,60)}"</div>`;
       } else if (notif.type === 'follow') {
-        actionIcon = '👥';
         actionText = 'تابعك';
+      } else if (notif.type === 'unfollow') {
+        actionText = 'ألغى متابعتك';
+        previewHtml = `<div class="unfollow-badge" onclick="window.openProfile('${actor.userId}')"><i class="fas fa-user-slash"></i> ${actor.username} ألغى متابعتك</div>`;
       } else if (notif.type === 'story') {
-        actionIcon = '📸';
         actionText = 'نشر ستوري جديد';
-        previewHtml = `<div class="story-preview-badge" onclick="window.viewStory('${notif.storyId}')"><i class="fas fa-play"></i> مشاهدة الستوري</div>`;
+        previewHtml = `<div class="notif-preview" onclick="window.viewStory('${notif.storyId}')"><i class="fas fa-play"></i> اضغط لمشاهدة الستوري</div>`;
       } else if (notif.type === 'post') {
-        actionIcon = '📝';
         actionText = 'نشر منشوراً جديداً';
         previewHtml = `<div class="notif-preview" onclick="window.openPost('${notif.targetPostId}')"><i class="fas fa-newspaper"></i> ${notif.targetPostContent?.substring(0,80) || 'منشور'} ...</div>`;
       } else if (notif.type === 'share') {
-        actionIcon = '🔁';
         actionText = 'شارك منشورك';
+        previewHtml = `
+          <div class="share-badge" onclick="window.openPost('${notif.targetPostId}')">
+            <i class="fas fa-retweet"></i> 
+            ${actor.username} شارك منشورك
+            ${notif.shareComment ? `<br><small>"${notif.shareComment}"</small>` : ''}
+          </div>
+        `;
+      } else if (notif.type === 'connection') {
+        actionText = 'يرغب في الارتباط بك';
+        extraActions = `
+          <div class="connection-request-actions">
+            <button class="accept-btn" onclick="window.acceptConnection('${notif.actorId}', '${notif.requesterUid}')">
+              <i class="fas fa-check-circle"></i> قبول
+            </button>
+            <button class="reject-btn" onclick="window.rejectConnection('${notif.actorId}')">
+              <i class="fas fa-times-circle"></i> رفض
+            </button>
+          </div>
+        `;
+        previewHtml = `
+          <div class="notif-preview" style="background: linear-gradient(145deg, #fef3c7, #fde68a);">
+            <i class="fas fa-heart" style="color: #ec4899;"></i> ${actor.username} يريد الارتباط بك 💍
+          </div>
+        `;
+      } else if (notif.type === 'view') {
+        actionText = 'شاهد ملفك الشخصي';
+        previewHtml = `
+          <div class="viewer-badge" onclick="window.openProfile('${actor.userId}')">
+            <i class="fas fa-eye"></i> ${actor.username} شاهد ملفك الشخصي
+          </div>
+        `;
       }
       
       html += `
@@ -787,10 +852,13 @@
                 ${actor.username} ${actor.verified ? '<i class="fas fa-check-circle verified-icon"></i>' : ''}
               </span>
               <span class="user-badge" style="background:${actor.colors?.frame || '#fbbf24'};">#${actor.userId}</span>
-              <span class="notif-action"><i class="fas ${getActionIconClass(notif.type)}"></i> ${actionText}</span>
+              <span class="notif-action">
+                <i class="fas ${getActionIconClass(notif.type)}"></i> ${actionText}
+              </span>
               <span class="notif-time"><i class="far fa-clock"></i> ${timeStr}</span>
             </div>
             ${previewHtml}
+            ${extraActions}
           </div>
         </div>
       `;
@@ -800,11 +868,20 @@
   }
   
   function getActionIconClass(type) {
-    const map = { like: 'fa-heart', comment: 'fa-comment', follow: 'fa-user-plus', story: 'fa-clock', post: 'fa-feather', share: 'fa-share' };
+    const map = { 
+      like: 'fa-heart', 
+      comment: 'fa-comment', 
+      follow: 'fa-user-plus', 
+      unfollow: 'fa-user-minus',
+      story: 'fa-clock', 
+      post: 'fa-feather', 
+      share: 'fa-share',
+      connection: 'fa-heart',
+      view: 'fa-eye'
+    };
     return map[type] || 'fa-bell';
   }
 
-  // تهيئة الفلاتر
   function initFilters() {
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -817,25 +894,81 @@
     });
   }
 
-  // دوال مساعدة للتفاعل
   window.openProfile = (userId) => {
     localStorage.setItem('openProfileId', userId);
     window.location.href = 'index.html';
   };
+  
   window.openPost = (postId) => {
     localStorage.setItem('openPostId', postId);
     window.location.href = 'index.html';
   };
+  
   window.openComments = (postId) => {
     localStorage.setItem('openCommentsId', postId);
     window.location.href = 'index.html';
   };
+  
   window.viewStory = (storyId) => {
     localStorage.setItem('openStoryId', storyId);
     window.location.href = 'index.html';
   };
+  
+  window.acceptConnection = async (requesterId, requesterUid) => {
+    await acceptConnectionRequest(requesterId, requesterUid);
+  };
+  
+  window.rejectConnection = async (requesterId) => {
+    await rejectConnectionRequest(requesterId);
+  };
 
-  // عند تحميل الصفحة
+  function subscribeToNotifications() {
+    if (!currentUser) return;
+    
+    const myUid = currentUser.uid;
+    
+    onSnapshot(collection(db, "posts"), async () => {
+      await buildNotificationsFromSnapshot();
+    });
+    
+    onSnapshot(collection(db, "stories"), async () => {
+      await buildNotificationsFromSnapshot();
+    });
+    
+    onSnapshot(doc(db, "social", "followers"), async (docSnap) => {
+      if (docSnap.exists()) {
+        const newFollowers = docSnap.data();
+        
+        if (followersMap[currentUser.uid]) {
+          const oldFollowing = followersMap[currentUser.uid] || [];
+          const newFollowing = newFollowers[currentUser.uid] || [];
+          const removed = oldFollowing.filter(id => !newFollowing.includes(id));
+          
+          if (removed.length > 0) {
+            const unfollowNotifications = JSON.parse(localStorage.getItem('unfollow_notifications') || '[]');
+            removed.forEach(userId => {
+              unfollowNotifications.push({
+                userId: userId,
+                username: usersMap.get(userId)?.username || 'مستخدم',
+                emoji: usersMap.get(userId)?.emoji || '👤',
+                timestamp: Date.now()
+              });
+            });
+            localStorage.setItem('unfollow_notifications', JSON.stringify(unfollowNotifications.slice(-50)));
+          }
+        }
+        
+        followersMap = newFollowers;
+        followingList = newFollowers[currentUser.uid] || [];
+        await buildNotificationsFromSnapshot();
+      }
+    });
+    
+    onSnapshot(doc(db, "notifications", myUid), async () => {
+      await buildNotificationsFromSnapshot();
+    });
+  }
+
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       currentUser = user;
@@ -843,16 +976,10 @@
       await loadFollowersData();
       subscribeToNotifications();
       initFilters();
-      // تنفيذ أولي
       setTimeout(() => buildNotificationsFromSnapshot(), 300);
     } else {
       container.innerHTML = `<div class="empty-state"><i class="fas fa-sign-in-alt"></i><h3>يرجى تسجيل الدخول</h3></div>`;
     }
-  });
-
-  // تنظيف عند مغادرة الصفحة
-  window.addEventListener('beforeunload', () => {
-    if (window.cleanupNotifications) window.cleanupNotifications();
   });
 </script>
 </body>
